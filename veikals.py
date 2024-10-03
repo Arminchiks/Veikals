@@ -1,4 +1,4 @@
-from itertools import product
+
 
 
 class Product:
@@ -9,29 +9,33 @@ class Product:
 
     def get_total_price(self):
         total=self.price*self.quantity
-        return(total)
+        return total
 
     #def izv(self):
         #return ("{} maksā {} " ).format(self.name, self.price)
 
 class ShoppingCart():
-    def __init__(self, product):
+    def __init__(self):
        
-        self.product=product
+        self.product=[]
+        
 
 
 
     def add_product_to_cart(self,product):
+        self.product.append(product)
         return("Pievieno produktu",product.name)
 
 
     
 
     def remove_product_from_cart(self,product):
+        self.product.remove(product)
         return("Noņem produktu", product.name)
 
-    def get_total_price(self, product):
-        return("Kopējā summa ir", product.get_total_price)
+    def get_total_price(self):
+        total=sum(product.get_total_price() for product in self.product)
+        return "Kopējā summa ir", total
 
 maize=Product("Maize", 4 , 4)
 
@@ -39,10 +43,11 @@ print("Kopējā cena par maizi ir: ",maize.get_total_price())
 siers=Product("Siers",2, 7)
 print("Kopējā cena par sieru ir: ",siers.get_total_price())
 
-maizes=ShoppingCart(maize)
+maizes=ShoppingCart()
 print(maizes.add_product_to_cart(maize))
+print(maizes.add_product_to_cart(siers))
 print(maizes.remove_product_from_cart(maize))
-print(maizes.get_total_price(maize))
+print(maizes.get_total_price())
 
 class Systemuser():
     def __init__(self, username, password, email):
